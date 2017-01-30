@@ -12,7 +12,7 @@ var openSetup = function() {
 
 // Функция закрытия окна
 var closeSetup = function() {
-setup.classList.add('invisible');
+  setup.classList.add('invisible');
 };
 
 //Вызов функций открытия и закрытия окна по клику на объекты .setup-open и .setup-close
@@ -33,11 +33,11 @@ var changeElementByClick = function(selector, colors, attribute) {
     var colorNumber = Math.floor(Math.random() * myColors.length);
     if (attribute === 'background') {
         myElement.style.background = myColors[colorNumber];
-      };
+    }
     if (attribute === 'fill') {
         myElement.style.fill = myColors[colorNumber];
-      };
-    };
+    }
+  };
   myElement.addEventListener('click', myChangeElement);
 };
 
