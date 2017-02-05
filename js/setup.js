@@ -6,12 +6,12 @@ var setupClose = document.querySelector('.setup-close');
 var setup = document.querySelector('.setup');
 
 // Функция открытия окна
-var openSetup = function() {
+function openSetup() {
   setup.classList.remove('invisible');
 };
 
 // Функция закрытия окна
-var closeSetup = function() {
+function closeSetup() {
   setup.classList.add('invisible');
 };
 
@@ -21,12 +21,12 @@ setupClose.addEventListener('click', closeSetup);
 
 //Валидация ввода имени персонажа
 var userName = document.querySelector('.setup-user-name');
-userName.setAttribute("required", "required");
-userName.setAttribute("maxlength", 50);
+userName.setAttribute('required', 'required');
+userName.setAttribute('maxlength', 50);
 
 //Общая функция изменения выбранного элемента по клику
 //Входящие: 1.селектор, 2.массив цветов, 3.атрибут, цвет которого нужно изменить
-var changeElementByClick = function(selector, colors, attribute) {
+function changeElementByClick(selector, colors, attribute) {
   var myElement = document.querySelector(selector);
   var myColors = colors;
   var myChangeElement = function() {
@@ -71,3 +71,43 @@ var fireballColors = [
   '#e6e848'
 ];
 changeElementByClick('.setup-fireball-wrap', fireballColors, 'background');
+
+// Добавить обработчики для альтернативного ввода с клавиатуры для кнопок открытия/закрытия диалога настройки персонажа
+
+var ENTER_KEY_CODE = 13;
+var ESC_KEY_CODE = 27;
+
+var overlay = document.querySelector('.overlay');
+var submitButton = document.querySelector('.setup-submit');
+
+setupOpen.addEventListener('keydown', openByEnter);
+document.addEventListener('keydown', closeByEsc);
+setupClose.addEventListener('keydown', closeByEnter);
+submitButton.addEventListener('keydown', closeByEnter);
+
+function openByEnter(evt) {
+  if (evt.keyCode === ENTER_KEY_CODE) {
+    openSetup();
+  }
+};
+
+function closeByEsc(evt) {
+  if (evt.keyCode === ESC_KEY_CODE) {
+    closeSetup();
+  }
+};
+
+function closeByEnter(evt) {
+  if (evt.keyCode === ENTER_KEY_CODE) {
+    closeSetup();
+  }
+};
+
+function handleBtnClick(event) {
+  toggleButton(event.target);
+}
+
+function toggleButton(element) {
+  var pressed = (element.getAttribute("aria-pressed") === "true");
+  element.setAttribute("aria-pressed", !pressed);
+}
